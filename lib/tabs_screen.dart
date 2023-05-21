@@ -16,7 +16,8 @@ class _TabsScreenState extends State<TabsScreen> {
   //   {'page': const CategoriesScreen(), 'title': 'Categories'},
   //   {'page': const FavoriteScreen(), 'title': 'Favorites'},
   // ];
-  List<Map<String, Object>> _pages = [];
+  // List<Map<String, Object>> _pages = [];
+  var _pages = <Map<String, Object>>[];
   int _selectedPageIndex = 0;
 
   @override
@@ -37,8 +38,9 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_pages[_selectedPageIndex]['title'])),
-      body: _pages[_selectedPageIndex]['page'],
+      appBar:
+          AppBar(title: Text(_pages[_selectedPageIndex]['title'] as String)),
+      body: _pages[_selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
         backgroundColor: Theme.of(context).primaryColor,

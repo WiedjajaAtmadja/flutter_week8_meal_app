@@ -3,7 +3,10 @@ import 'dummy_data.dart';
 
 class DetailScreen extends StatelessWidget {
   static const String routeName = '/detail';
-  const DetailScreen({super.key});
+  final Function toggleFavorite;
+  final Function isMealFavorite;
+
+  const DetailScreen(this.toggleFavorite, this.isMealFavorite, {super.key});
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
@@ -45,64 +48,71 @@ class DetailScreen extends StatelessWidget {
     final appBar = AppBar(title: Text(selectedMeal.title));
 
     return Scaffold(
-        appBar: appBar,
-        body: Center(
-          child: SingleChildScrollView(
-              child: Column(
-            children: [
-              SizedBox(
-                height: (mediaQuery.size.height -
-                        appBar.preferredSize.height -
-                        mediaQuery.padding.top) *
-                    0.3,
-                width: double.infinity,
-                child: Image.network(
-                  selectedMeal.imageUrl,
-                  fit: BoxFit.cover,
-                ),
+      appBar: appBar,
+      body: Center(
+        child: SingleChildScrollView(
+            child: Column(
+          children: [
+            SizedBox(
+              height: (mediaQuery.size.height -
+                      appBar.preferredSize.height -
+                      mediaQuery.padding.top) *
+                  0.3,
+              width: double.infinity,
+              child: Image.network(
+                selectedMeal.imageUrl,
+                fit: BoxFit.cover,
               ),
-              buildSectionTitle(context, 'Ingredients'),
-              buildContainer(
-                mediaQuery,
-                appBar,
-                ListView.builder(
-                  itemCount: selectedMeal.ingredients.length,
-                  itemBuilder: (context, index) => Card(
-                    color: Theme.of(context).secondaryHeaderColor,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 5,
-                        horizontal: 10,
-                      ),
-                      child: Text(selectedMeal.ingredients[index]),
+            ),
+            buildSectionTitle(context, 'Ingredients'),
+            buildContainer(
+              mediaQuery,
+              appBar,
+              ListView.builder(
+                itemCount: selectedMeal.ingredients.length,
+                itemBuilder: (context, index) => Card(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 5,
+                      horizontal: 10,
                     ),
+                    child: Text(selectedMeal.ingredients[index]),
                   ),
                 ),
               ),
-              buildSectionTitle(context, 'Steps'),
-              buildContainer(
-                mediaQuery,
-                appBar,
-                ListView.builder(
-                  itemCount: selectedMeal.steps.length,
-                  itemBuilder: (context, index) => Column(
-                    children: [
-                      ListTile(
-                        leading: CircleAvatar(
-                          child: Text('# ${(index + 1)}'),
-                        ),
-                        title: Text(
-                          selectedMeal.steps[index],
-                          style: const TextStyle(fontSize: 16),
-                        ),
+            ),
+            buildSectionTitle(context, 'Steps'),
+            buildContainer(
+              mediaQuery,
+              appBar,
+              ListView.builder(
+                itemCount: selectedMeal.steps.length,
+                itemBuilder: (context, index) => Column(
+                  children: [
+                    ListTile(
+                      leading: CircleAvatar(
+                        child: Text('# ${(index + 1)}'),
                       ),
-                      const Divider(),
-                    ],
-                  ),
+                      title: Text(
+                        selectedMeal.steps[index],
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    const Divider(),
+                  ],
                 ),
               ),
-            ],
-          )),
-        ));
+            ),
+          ],
+        )),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          isMealFavorite(id) ? Icons.star : Icons.star_border,
+        ),
+        onPressed: () => toggleFavorite(id),
+      ),
+    );
   }
 }
