@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dummy_data.dart';
+import '../data/dummy_data.dart';
 
 class DetailScreen extends StatelessWidget {
   static const String routeName = '/detail';

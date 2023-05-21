@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'recipe_item.dart';
-import 'dummy_data.dart';
+import '../widgets/recipe_item.dart';
+import '../data/dummy_data.dart';
 
 class RecipeScreen extends StatelessWidget {
   static const String routeName = '/recipe';

@@ -1,11 +1,11 @@
 // up to slide 43
 import 'package:flutter/material.dart';
-import 'categories_screen.dart';
-import 'recipe_screen.dart';
-import 'detail_screen.dart';
-import 'tabs_screen.dart';
-import 'meal.dart';
-import 'dummy_data.dart';
+import 'screens/categories_screen.dart';
+import 'screens/recipe_screen.dart';
+import 'screens/detail_screen.dart';
+import 'screens/tabs_screen.dart';
+import 'models/meal.dart';
+import 'data/dummy_data.dart';
 
 void main() {
   runApp(const MainApp());
