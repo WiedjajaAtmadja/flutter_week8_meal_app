@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'categories_screen.dart';
 import 'favorite_screen.dart';
 import '../models/meal.dart';
+import '../widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   final List<Meal> favoriteMeals;
@@ -37,9 +38,31 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // return DefaultTabController(
+    // length: 2,
+    // child: Scaffold(
+    //   appBar: AppBar(
+    //     // title: Text(_pages[_selectedPageIndex]['title'] as String),
+    //     title: const Text('Meals'),
+    //     bottom: const TabBar(
+    //       tabs: <Widget>[
+    //         Tab(icon: Icon(Icons.category), text: 'Categories'),
+    //         Tab(icon: Icon(Icons.star), text: 'Favorites'),
+    //       ],
+    //     ),
+    //   ),
+    //   body: TabBarView(
+    //     children: <Widget>[
+    //       const CategoriesScreen(),
+    //       FavoriteScreen(widget.favoriteMeals),
+    //     ],
+    //   ),
+    // ));
+
     return Scaffold(
       appBar:
           AppBar(title: Text(_pages[_selectedPageIndex]['title'] as String)),
+      drawer: const MainDrawer(),
       body: _pages[_selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
@@ -47,13 +70,16 @@ class _TabsScreenState extends State<TabsScreen> {
         unselectedItemColor: Colors.white,
         selectedItemColor: Theme.of(context).secondaryHeaderColor,
         currentIndex: _selectedPageIndex,
-        items: const [
+        type: BottomNavigationBarType.shifting,
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
+            backgroundColor: Theme.of(context).primaryColor,
+            icon: const Icon(Icons.category),
             label: 'Categories',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star),
+            backgroundColor: Theme.of(context).primaryColor,
+            icon: const Icon(Icons.star),
             label: 'Favorites',
           ),
         ],
